@@ -17,5 +17,5 @@ protected Character(int maxHP, int minimumDamage, int maximumDamage) {
         this.maximumDamage = maximumDamage;
     }
 
-
+    public abstract String getType();
 }
