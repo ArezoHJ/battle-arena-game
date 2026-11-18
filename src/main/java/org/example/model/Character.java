@@ -18,4 +18,16 @@ protected Character(int maxHP, int minimumDamage, int maximumDamage) {
     }
 
     public abstract String getType();
+
+    public final int getHp() {
+        return hp;
+    }
+
+    public final int getMaxHP() {
+        return maxHP;
+    }
+
+    public final boolean isAlive() {
+        return hp > 0;
+    }
 }
