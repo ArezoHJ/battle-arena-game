@@ -30,4 +30,20 @@ protected Character(int maxHP, int minimumDamage, int maximumDamage) {
     public final boolean isAlive() {
         return hp > 0;
     }
+
+    public final int attack(Character opponent) {
+        //
+    }
+
+    public final int receiveDamage(int damage) {
+        //
+    }
+
+    protected final int heal(int amount) {
+        //
+    }
+
+    protected final void prepareDefend() {
+        defending = true;
+    }
 }
