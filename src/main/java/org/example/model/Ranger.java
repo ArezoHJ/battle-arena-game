@@ -14,6 +14,8 @@ public final class Ranger extends Character {
 
     @Override
     public String useSpecial(Character opponent) {
-        return "Ranger använder sin specialförmåga!";
+        int damage = ThreadLocalRandom.current().nextInt(12, 21); // Random damage between 12 and 20
+        int actualDamage = opponent.receiveDamage(damage);
+        return "Ranger använder sin specialförmåga!" + " Den gör " + actualDamage + " skada.";
     }
 }

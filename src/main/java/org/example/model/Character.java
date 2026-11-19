@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public abstract class Character implements SpecialAbility {
     private final int maxHP;
     private final int minimumDamage;
@@ -32,15 +34,28 @@ protected Character(int maxHP, int minimumDamage, int maximumDamage) {
     }
 
     public final int attack(Character opponent) {
-        //
+        int damage = ThreadLocalRandom.current().nextInt(minimumDamage, maximumDamage + 1);
+        return opponent.receiveDamage(damage);
     }
 
     public final int receiveDamage(int damage) {
-        //
+        if (damage < 0) {
+            throw new IllegalArgumentException("Damage cannot be negative.");
+        }
+        int effectiveDamage = defending ? damage / 2 : damage;
+        defending = false;
+        int actualDamage = Math.min(hp, effectiveDamage);
+        hp -= actualDamage;
+        return actualDamage;
     }
 
     protected final int heal(int amount) {
-        //
+        if (amount < 0) {
+            throw new IllegalArgumentException("Healing cannot be negative.");
+        }
+        int actualHealing = Math.min(amount, maxHP - hp);
+        hp += actualHealing;
+        return actualHealing;
     }
 
     protected final void prepareDefend() {
