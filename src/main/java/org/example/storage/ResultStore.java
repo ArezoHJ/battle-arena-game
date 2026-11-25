@@ -12,6 +12,8 @@ import java.util.Base64;
 import java.util.List;
 
 public final class ResultStore {
+    private static final String FIELD_SEPARATOR = "\t";
+    private static final int FIELD_COUNT = 5;
     private final Path historyPath;
 
     public ResultStore(Path historyPath) {
@@ -42,7 +44,7 @@ public final class ResultStore {
 
         public static String encode(GameResult result) {
             Base64.Encoder encoder = Base64.getUrlEncoder().withoutPadding();
-            return String.join("\t",
+            return String.join(FIELD_SEPARATOR,
                     encodeField(encoder, result.playerName()),
                     encodeField(encoder, result.playerCharacter()),
                     encodeField(encoder, result.computerCharacter()),
@@ -51,8 +53,8 @@ public final class ResultStore {
         }
 
     public static GameResult decode(String line) throws IOException {
-        String[] fields = line.split("\t", -1);
-        if (fields.length != 5) {
+        String[] fields = line.split(FIELD_SEPARATOR, -1);
+        if (fields.length != FIELD_COUNT) {
             throw new IOException("En rad i matchhistoriken har fel format.");
         }
         try {
