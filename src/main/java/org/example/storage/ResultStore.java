@@ -42,7 +42,7 @@ public final class ResultStore {
         return List.copyOf(results);
     }
 
-        public static String encode(GameResult result) {
+    public static String encode(GameResult result) {
             Base64.Encoder encoder = Base64.getUrlEncoder().withoutPadding();
             return String.join(FIELD_SEPARATOR,
                     encodeField(encoder, result.playerName()),
@@ -50,7 +50,7 @@ public final class ResultStore {
                     encodeField(encoder, result.computerCharacter()),
                     encodeField(encoder, result.winner()),
                     Integer.toString(result.rounds()));
-        }
+    }
 
     public static GameResult decode(String line) throws IOException {
         String[] fields = line.split(FIELD_SEPARATOR, -1);
@@ -73,7 +73,7 @@ public final class ResultStore {
     private static String encodeField(Base64.Encoder encoder, String value) {
         return encoder.encodeToString(value.getBytes(StandardCharsets.UTF_8));
     }
-        private static String decodeField(Base64.Decoder decoder, String value) {
-            return new String(decoder.decode(value), StandardCharsets.UTF_8);
-        }
+    private static String decodeField(Base64.Decoder decoder, String value) {
+        return new String(decoder.decode(value), StandardCharsets.UTF_8);
+    }
 }
